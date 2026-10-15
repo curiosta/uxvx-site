@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live demo · UXVX</title>
+<meta name="description" content="Try UXVX in the browser: opt in to camera, calibrate, watch paragraphs highlight when you dwell or re-read, and get a simple explanation. No extension required.">
+<link rel="canonical" href="https://uxvx.curiosta.com/demo/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UXVX">
+<meta property="og:title" content="Live demo · UXVX">
+<meta property="og:description" content="Opt-in webcam gaze on a sample article. Struggle highlights stay on-device. Optional explain with your LLM key or a mock.">
+<meta property="og:url" content="https://uxvx.curiosta.com/demo/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#041726">
+<meta name="author" content="Manoj Sahukar">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="/">UXVX<span class="dot" aria-hidden="true">.</span></a>
+    <nav class="sectionnav" aria-label="Main">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/demo/" aria-current="page">Live demo</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">In-browser PoC · no extension</p>
+    <h1>Live demo</h1>
+    <p class="lede">Read the sample article. Optionally opt in to the camera, calibrate, and watch paragraphs light up when dwell or re-reads trip the heuristic. Webcam gaze is approximate — good enough to show the idea.</p>
+  </div>
+</section>
+
+<div class="wrap demo-shell">
+  <article class="demo-article" id="article" aria-labelledby="article-title">
+    <h1 id="article-title">Why air quality monitors need honest calibration stories</h1>
+    <p class="demo-meta">Sample article · invented for this PoC · ~4 minute read</p>
+
+    <p data-uxvx-id="p1">Most consumer air-quality gadgets look confident on a shop shelf: a clean enclosure, a bright screen, a number that updates every second. The harder part is knowing what that number means when the room changes — cooking oil smoke one minute, monsoon humidity the next, a neighbour’s incense after that.</p>
+
+    <p data-uxvx-id="p2">Calibration is the quiet backbone. A sensor that was trimmed in a dry lab can drift when electrolytes dry out, when dust cakes on an inlet, or when firmware silently changes the averaging window. Buyers rarely see those details in the marketing card, so the first week of ownership becomes a homemade science experiment.</p>
+
+    <p data-uxvx-id="p3">A useful mental model is “reference, not gospel.” Treat the reading as a relative signal for the same room over time. If Tuesday’s peak is twice Monday’s while the windows stayed shut, something in the air likely changed. Absolute microgram claims need a co-located reference instrument and a documented uncertainty band — the kind of paperwork research labs already expect.</p>
+
+    <p data-uxvx-id="p4">For classrooms and clinics, the UX of the device matters as much as the chemistry. A chart that only shouts red alarms trains people to ignore it. A quieter design that shows trend lines, notes when the fan filter was last changed, and admits “estimating” during warm-up builds more trust than a fake precision of three decimal places.</p>
+
+    <p data-uxvx-id="p5">Open hardware projects sometimes publish raw ADC counts alongside the pretty AQI colour. That transparency helps teachers and makers reproduce a result. It also makes failure modes visible: saturation, cross-sensitivity to alcohols, and the moment a cheap CO₂ NDIR cell needs a fresh zero in outdoor air.</p>
+
+    <p data-uxvx-id="p6">If you are evaluating a monitor for a school tender, ask for the calibration protocol, the last field comparison against a reference, the firmware changelog policy, and whether personal data ever leaves the LAN. Gadgets that phone home by default are a separate product decision from the sensor physics — and they should be sold that way.</p>
+
+    <p data-uxvx-id="p7">None of this requires you to become a metrologist. It does ask vendors — and curious buyers — to prefer plain language over mystique. A device that says “±15% under these conditions, re-zero monthly” is often more valuable than one that promises perfection it cannot keep.</p>
+  </article>
+
+  <aside class="demo-panel" aria-label="Demo controls">
+    <h2>Controls</h2>
+    <p class="status" id="status" data-state="idle">Camera idle · consent required</p>
+
+    <div class="consent-gate" id="consent-gate">
+      <label>
+        <input type="checkbox" id="consent" />
+        <span>I understand the camera is used only in this browser to estimate gaze. Video is not uploaded. Accuracy is approximate.</span>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-primary btn-sm" id="btn-start" disabled>Start gaze</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="btn-stop" disabled>Stop</button>
+      <button type="button" class="btn btn-dark btn-sm" id="btn-calibrate" disabled>Calibrate</button>
+    </div>
+
+    <p class="hint">No camera? Select a paragraph, then use <strong>Explain selection</strong> below. Struggle detection needs gaze.</p>
+
+    <label for="provider">Explain provider</label>
+    <select id="provider">
+      <option value="mock" selected>Mock (on-device, no key)</option>
+      <option value="xai">xAI Grok</option>
+      <option value="openai">OpenAI-compatible</option>
+    </select>
+
+    <div id="key-fields" hidden>
+      <label for="apiKey">API key (stored in localStorage only)</label>
+      <input id="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-… or xai-…" />
+      <label for="baseUrl">Base URL</label>
+      <input id="baseUrl" type="url" spellcheck="false" />
+      <label for="model">Model</label>
+      <input id="model" type="text" spellcheck="false" />
+      <button type="button" class="btn btn-ghost btn-sm" id="btn-save-settings" style="margin-top:8px">Save settings</button>
+      <p class="hint">xAI API usage is billed on console.x.ai — not via a Grok Ultra chat subscription. Browser calls may fail if the provider blocks CORS; the mock always works. The Chrome extension avoids that limit.</p>
+    </div>
+
+    <div class="actions" style="margin-top:12px">
+      <button type="button" class="btn btn-dark btn-sm" id="btn-explain-sel">Explain selection</button>
+      <button type="button" class="btn btn-ghost btn-sm" id="btn-clear-flags">Clear flags</button>
+    </div>
+
+    <p class="video-privacy-note">WebGazer may show a small preview while running; frames still stay local. Model weights may download on first start.</p>
+
+    <details open>
+      <summary>Flagged paragraphs</summary>
+      <ul class="flag-list" id="flag-list">
+        <li class="muted" id="flag-empty">None yet — dwell ~20s+ or re-read 3×.</li>
+      </ul>
+    </details>
+  </aside>
+</div>
+
+<section class="block alt">
+  <div class="wrap narrow">
+    <h2>Chrome extension</h2>
+    <p class="muted">This page shows the concept without installing anything. The extension (private beta) is for real sites you already browse.</p>
+    <p class="cta">
+      <a class="btn btn-primary" href="https://github.com/curiosta/uxvx">Extension on GitHub (private beta)</a>
+      <a class="btn btn-ghost" href="/privacy/">Privacy</a>
+    </p>
+    <p class="small muted">With repo access: Load unpacked from the clone. Public Web Store listing is not available yet.</p>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p><strong>UXVX</strong> demo — on-device gaze PoC. Not a medical tool.</p>
+    <nav class="family" aria-label="Curiosta family">
+      <span class="family-label">Curiosta family</span>
+      <a href="https://curiosta.com/">curiosta</a>
+      <a href="https://learn.curiosta.com/">learn</a>
+      <a href="https://hawkeye.curiosta.com/">hawkeye</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="calib-overlay" id="calib-overlay" data-open="false" role="dialog" aria-modal="true" aria-labelledby="calib-msg">
+  <p class="calib-msg" id="calib-msg">Look at each coral dot and click it 5 times.</p>
+</div>
+<div class="gaze-dot" id="gaze-dot" aria-hidden="true"></div>
+<div class="explain-tip" id="explain-tip" data-open="false" role="dialog" aria-label="Explanation">
+  <div class="tip-head">
+    <strong>Simple explanation</strong>
+    <button type="button" class="tip-close" id="tip-close" aria-label="Close">×</button>
+  </div>
+  <div class="tip-body" id="tip-body"></div>
+</div>
+
+<script src="/js/struggle.js"></script>
+<script src="/js/providers.js"></script>
+<script src="/js/demo.js"></script>
+</body>
+</html>

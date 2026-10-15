@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · UXVX</title>
+<meta name="description" content="UXVX privacy policy: camera opt-in, on-device gaze processing, no video upload, localStorage keys only, optional LLM text only.">
+<link rel="canonical" href="https://uxvx.curiosta.com/privacy/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UXVX">
+<meta property="og:title" content="Privacy · UXVX">
+<meta property="og:description" content="Camera opt-in. No video leaves the device. Keys stay in the browser. Optional LLM gets only the text you ask to explain.">
+<meta property="og:url" content="https://uxvx.curiosta.com/privacy/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#041726">
+<meta name="author" content="Manoj Sahukar">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="/">UXVX<span class="dot" aria-hidden="true">.</span></a>
+    <nav class="sectionnav" aria-label="Main">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/demo/">Live demo</a></li>
+        <li><a href="/privacy/" aria-current="page">Privacy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Policy · last updated 15 Oct 2026</p>
+    <h1>Privacy</h1>
+    <p class="lede">Short version: camera off until you opt in; video never leaves your device; keys stay in the browser; only text you choose to explain may go to an LLM you configure.</p>
+  </div>
+</section>
+<section class="block prose">
+  <div class="wrap">
+    <h2>This website (uxvx.curiosta.com)</h2>
+    <ul>
+      <li><strong>Camera.</strong> Off by default. It turns on only after you give explicit consent on the demo page and press Start. It stops when you press Stop or leave the page. Frames are processed in memory in your browser (via WebGazer) to estimate gaze. No video, images, face landmarks, or calibration data are uploaded to Curiosta servers — we don’t run a backend that receives them.</li>
+      <li><strong>WebGazer model weights.</strong> On first start, WebGazer may download face-mesh model files from its usual CDN / TensorFlow Hub hosts. That is model data, not your camera feed.</li>
+      <li><strong>Text to an LLM.</strong> If you use “Explain simply” with a configured provider, only the selected or flagged paragraph text (capped at 4,000 characters) is sent to the endpoint you entered. With the built-in mock provider, nothing leaves the browser.</li>
+      <li><strong>API keys and settings.</strong> Stored only in <code>localStorage</code> on this device. Cleared when you clear site data. Never synced by us.</li>
+      <li><strong>No analytics product.</strong> This PoC does not include a third-party analytics suite. Your browser and host (GitHub Pages) may keep ordinary web-server logs (IP, user-agent) outside our control.</li>
+    </ul>
+    <h2>Chrome extension (private beta)</h2>
+    <p>The companion extension at <a href="https://github.com/curiosta/uxvx">github.com/curiosta/uxvx</a> follows the same model: opt-in camera, on-device gaze, keys in <code>chrome.storage.local</code>, text-only LLM calls. See that repo’s <code>PRIVACY.md</code> for extension-specific details (per-site camera prompts, MAIN-world injection limits).</p>
+    <h2>What we don’t do</h2>
+    <ul>
+      <li>We do not sell biometric data.</li>
+      <li>We do not claim medical, diagnostic, or exam-proctoring accuracy.</li>
+      <li>We do not require an account for the site demo.</li>
+    </ul>
+    <h2>Contact</h2>
+    <p>Questions: <a href="https://curiosta.com/">curiosta.com</a>.</p>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <p><strong>UXVX</strong> — privacy-first gaze-aware reading / UX insight PoC by Manoj Sahukar · Curiosta.</p>
+    <nav class="family" aria-label="Curiosta family">
+      <span class="family-label">Curiosta family</span>
+      <a href="https://curiosta.com/">curiosta</a>
+      <a href="https://mind.curiosta.com/">mind</a>
+      <a href="https://learn.curiosta.com/">learn</a>
+      <a href="https://hawkeye.curiosta.com/">hawkeye</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

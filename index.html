@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UXVX — privacy-first gaze-aware reading demo</title>
+<meta name="description" content="UXVX is a privacy-first demo that notices where you linger while reading and offers a simpler explanation — on this page, no extension required. Camera stays off until you opt in; video never leaves your device.">
+<link rel="canonical" href="https://uxvx.curiosta.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UXVX">
+<meta property="og:title" content="UXVX — privacy-first gaze-aware reading demo">
+<meta property="og:description" content="Notice where you struggle while reading. Webcam gaze stays on-device. Optional LLM explain. Chrome extension in private beta.">
+<meta property="og:url" content="https://uxvx.curiosta.com/">
+<meta property="og:image" content="https://uxvx.curiosta.com/favicon.svg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#041726">
+<meta name="author" content="Manoj Sahukar">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&amp;family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="/">UXVX<span class="dot" aria-hidden="true">.</span></a>
+    <nav class="sectionnav" aria-label="Main">
+      <ul>
+        <li><a href="/" aria-current="page">Home</a></li>
+        <li><a href="/demo/">Live demo</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Curiosta · proof of concept</p>
+    <h1>See where reading <span class="accent">gets hard.</span></h1>
+    <p class="lede">UXVX watches (only if you say yes) where your eyes linger on a page, flags paragraphs you dwell on or re-read, and can explain them more simply — with your own LLM key or a local mock. Video stays in the browser.</p>
+    <p class="cta">
+      <a class="btn btn-primary" href="/demo/">Try the live demo</a>
+      <a class="btn btn-ghost" href="#extension">Extension (private beta)</a>
+    </p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="how">
+  <div class="wrap">
+    <h2 id="how">How the demo works</h2>
+    <p class="muted">No install. One sample article. Honest limits on webcam accuracy.</p>
+    <ul class="cards">
+      <li class="card"><div>
+        <p class="eyebrow">1 · Consent</p>
+        <h3>Camera off until you opt in</h3>
+        <p>Nothing starts until you tick the consent box and press Start. Stop anytime. Frames are processed in memory only.</p>
+      </div></li>
+      <li class="card"><div>
+        <p class="eyebrow">2 · Gaze</p>
+        <h3>Rough paragraph-level tracking</h3>
+        <p>WebGazer estimates where you’re looking. It’s coarse (±100–200&nbsp;px) — enough for a paragraph, not a word. Calibrate in good light.</p>
+      </div></li>
+      <li class="card"><div>
+        <p class="eyebrow">3 · Explain</p>
+        <h3>Your key, or a mock</h3>
+        <p>Flagged text can go to xAI / an OpenAI-compatible API you configure, or stay local with a mock explanation. Keys live in <code>localStorage</code> only.</p>
+      </div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block alt" aria-labelledby="why">
+  <div class="wrap">
+    <h2 id="why">Reading now, UX insight later</h2>
+    <p class="muted">Same on-device stack can later score how people attend to a layout — still without shipping video off the device.</p>
+    <div class="callout">
+      <h3>What’s real today</h3>
+      <p>This site is a self-contained reading PoC. The Chrome extension at <a href="https://github.com/curiosta/uxvx">curiosta/uxvx</a> is the same idea for any page you already browse — currently a <strong>private beta</strong>, not a public Web Store listing.</p>
+    </div>
+    <div class="callout coral" style="margin-top:16px">
+      <h3>What’s not claimed</h3>
+      <p>Webcam gaze is not clinical eye-tracking. Struggle thresholds are heuristics. Facial “emotion” reading is not in this PoC. We don’t sell biometric data.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block dark" id="extension" aria-labelledby="ext">
+  <div class="wrap">
+    <p class="eyebrow">Chrome extension</p>
+    <h2 id="ext" style="color:#fff;max-width:20ch">Coming soon for everyday browsing</h2>
+    <p class="lede">The extension can run on pages you don’t control. The repo is private while we harden privacy and icons for a possible unlisted Web Store release.</p>
+    <p class="cta">
+      <a class="btn btn-primary" href="https://github.com/curiosta/uxvx">Extension on GitHub (private beta)</a>
+      <a class="btn btn-ghost" href="/demo/">Use the site demo instead</a>
+    </p>
+    <p class="small" style="color:#9bb6c4;max-width:60ch;margin-top:1rem">Developers with repo access: clone, open <code>chrome://extensions</code>, enable Developer mode, <strong>Load unpacked</strong>, pick the folder. See the extension README for providers (xAI, OpenAI-compatible, Ollama).</p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="privacy-teaser">
+  <div class="wrap narrow">
+    <h2 id="privacy-teaser">Privacy in one screen</h2>
+    <ul>
+      <li>Camera off by default; opt-in only.</li>
+      <li>No video, images, or face landmarks leave the device.</li>
+      <li>API keys stay in your browser storage.</li>
+      <li>Only paragraph text you ask to explain is sent to the LLM you choose.</li>
+      <li>No analytics backend on this PoC.</li>
+    </ul>
+    <p><a href="/privacy/">Full privacy page →</a></p>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <p><strong>UXVX</strong> — privacy-first gaze-aware reading / UX insight PoC by Manoj Sahukar · Curiosta.</p>
+    <p class="small">Webcam estimates are approximate. This is a research-style demo, not a medical or accessibility diagnosis tool. Companion extension: <a href="https://github.com/curiosta/uxvx">curiosta/uxvx</a> (private).</p>
+    <nav class="family" aria-label="Curiosta family">
+      <span class="family-label">Curiosta family</span>
+      <a href="https://curiosta.com/">curiosta</a>
+      <a href="https://mind.curiosta.com/">mind</a>
+      <a href="https://learn.curiosta.com/">learn</a>
+      <a href="https://nest.curiosta.com/">nest</a>
+      <a href="https://hawkeye.curiosta.com/">hawkeye</a>
+      <a href="https://founder.curiosta.com/">founder</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
