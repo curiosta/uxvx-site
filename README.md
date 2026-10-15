@@ -16,6 +16,8 @@ python3 -m http.server 8765
 
 No build step. GitHub Pages-ready: `CNAME` → `uxvx.curiosta.com`, `.nojekyll` present.
 
+WebGazer is vendored under `js/vendor/webgazer.min.js` (v3.3.0) so the demo does not depend on a CDN for the library. Face-mesh model weights may still download on first camera start.
+
 ## Privacy model
 Camera off until opt-in. Video processed in-browser only. Settings/keys in `localStorage`. See `/privacy/`.
 

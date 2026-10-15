@@ -1,7 +1,7 @@
-/* UXVX site demo — consent-gated WebGazer + struggle flags + explain */
+/* UXVX site demo — consent-gated WebGazer (vendored) + struggle flags + explain */
 (function () {
   const STORAGE_KEY = 'uxvx-demo-settings-v1';
-  const WEBGAZER_SRC = 'https://cdn.jsdelivr.net/gh/brownhci/WebGazer@3.3.0/dist/webgazer.min.js';
+  const WEBGAZER_SRC = '/js/vendor/webgazer.min.js';
   const CALIB_POINTS = [
     [0.1, 0.12], [0.5, 0.12], [0.9, 0.12],
     [0.1, 0.5],  [0.5, 0.5],  [0.9, 0.5],
@@ -155,7 +155,7 @@
       s.src = src;
       s.async = true;
       s.onload = () => resolve();
-      s.onerror = () => reject(new Error('Failed to load WebGazer from CDN'));
+      s.onerror = () => reject(new Error('Failed to load WebGazer (vendored script)'));
       document.head.appendChild(s);
     });
   }
